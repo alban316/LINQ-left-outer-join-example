@@ -19,10 +19,11 @@ namespace ConsoleApplication3
             var q = (
                 from l in left
                 join r in right on l equals r into leftright
-                from lr in leftright.DefaultIfEmpty()
-                where lr == 0
+                from lr in leftright.DefaultIfEmpty()  //Be mindful of the default values for various types
+                where lr == 0                          //when doing comparison here, e.g. int = 0, string = null, Guid = Guid.Empty, etc...
                 select l).ToList();
 
+            
             foreach (var item in q)
             {
                 Console.WriteLine(item);
